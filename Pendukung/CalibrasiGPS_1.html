@@ -1,0 +1,68 @@
+You can use geo links to open the navigation app on Android. Unfortunately this is not supported under iOS. But generally you have to remember that you can't directly control how this link is handled on the device, as I said iOS does nothing or may even show an invalid link error, and there may be Android devices which also do not support this feature. Just remember that you cannot be sure if it works anywhere and as such your website should not depend on this feature, it should just be an extra bit of usability for devices which support this feature.
+
+1) Showing a location in a native map app
+
+With the geo link you can specify a location like this:
+
+geo:longitude,laditude
+Or like this:
+
+geo:street+address
+You can also search for an address like this:
+
+geo:?q=street+address
+You can also define a zoom level like this:
+
+geo:street+address?z=3
+And it is also possible to combine multiple parameters like this:
+
+geo:?q=street+address&z=15
+But beware that this does not work as expected. In this case in Google Maps it starts out with the defined zoom level and then starts the search an zooms in on the target.
+
+Here is a little bit of Android documentation.
+
+2) Opening a route in Google Maps
+
+You can also use the following link to just show a route between two locations:
+
+http://maps.google.com/maps?saddr=street+adress&daddr=street+address
+And coordinates also work with this:
+
+http://maps.google.com/maps?saddr=50,10&daddr=50,20
+You can again use it like this:
+
+<a href="http://maps.google.com/maps?saddr=New+York&daddr=San+Francisco">Route New York --> San Francisco</a>   
+3) Immediately starting a navigation
+
+With this option the link opens a route to a location and the device doesn't just show the route but it immediately starts navigating:
+
+google.navigation:q=street+address
+You can also use coordinates:
+
+google.navigation:q=50,10
+You would use it like this:
+
+<a href="google.navigation:q=San+Francisco">Navigation to San Francisco</a>  
+4) Testing
+
+I have tested everything on a Nexus 5 running Android 4.4 (KitKat) with the following HTML:
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Geo Link Test</title>
+</head>
+
+<body>
+  <p><a href="geo:50,10">Location 50/10</a></p>
+  <p><a href="geo:Vienna">Location Vienna</a></p>
+  <p><a href="geo:?z=5&q=New+York">Zoom 5, Search for New York</a></p>
+  <p><a href="geo:?q=San+Francisco&z=15">Zoom 15, Search for San Francisco</a></p>
+  <p><a href="google.navigation:q=San+Francisco">Navigation to San Francisco</a></p>
+  <p><a href="google.navigation:q=50,10">Navigation to 50/10</a></p>
+  <p><a href="http://maps.google.com/maps?saddr=New+York&daddr=San+Francisco">Route New York --> San Francisco</a></p>
+  <p><a href="http://maps.google.com/maps?saddr=50,10&daddr=50,20">Route 50/10 --> 50/20</a></p>
+</body>
+
+</html>

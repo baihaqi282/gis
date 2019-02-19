@@ -1,0 +1,66 @@
+	var p1 = "'" + SVdesa + "'";
+	
+	<?php
+	$abc =  "p1";
+	
+	
+	$vv =  "p1";
+	
+	
+	$lert = "SELECT * FROM tb_desa where desa=  '$abc' ";
+	
+	echo "alert('SELECT * FROM tb_desa where desa=' + $vv)"; 
+	?> 
+	
+	
+		$abc =  "'Juai'";	
+	$vv =  "p1";
+	$cva = $vv;
+
+	$lert0 = "SELECT * FROM tb_desa where desa=  $vv";
+	$lert00 = "SELECT * FROM tb_desa where desa= $abc ";
+	
+	$lert1 = "\"SELECT * FROM tb_desa where desa="; 
+	$akhir = "\"";
+	$lert2 = "'$lert1' + $vv";
+	$lert3 =  " $lert2 + '$akhir'";
+	$lert4 = $lert3;
+	
+	
+	
+	 $.each(data, function(k, v){	
+     	 document.getElementById('lat').value = v.latti;
+		 document.getElementById('lng').value = v.longi;
+		 var  latgg = document.getElementById('lat').value;
+		 var  lnggg =  document.getElementById('lng').value;
+
+		  var myLatlng = new google.maps.LatLng ( latgg, lnggg); //disini fokus mapnya (seputih banyak lamteng)
+			var mapOptions = {
+				zoom:  19,
+				center: myLatlng,
+				mapTypeId: google.maps.MapTypeId.SATELLITE
+			};
+
+		  var map1 = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+		  var marker = new google.maps.Marker({
+			position: myLatlng,
+			map: map1,
+			title: 'Click to zoom',
+			draggable:true
+		  });
+		  
+		  
+			marker.addListener('drag', handleEvent);
+			marker.addListener('dragend', handleEvent);
+			
+			var infowindow = new google.maps.InfoWindow({
+				content: '<h4>Lokasi Desa '+ v.desa +'</h4>'
+			});
+			
+			infowindow.open(map, marker);
+				 
+	
+	  });  	 
+	
+   }

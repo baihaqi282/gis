@@ -1,0 +1,96 @@
+			<div class="form-group">
+                <label>Kelas Unsur <span class="text-danger">*</span></label>
+                <select class="form-control" name="kelas" id="kelas" onchange="selectktg()">
+						<option value="Toponimi Bangunan">Toponimi Bangunan</option>
+						<option value="Toponimi Cakupan">Toponimi Cakupan</option>
+						<option value="Toponimi Industri">Toponimi Industri</option>
+						<option value="Toponimi Olahraga">Toponimi Olahraga</option>
+						<option value="Toponimi Pariwisata, Seni dan Budaya">Toponimi Pariwisata, Seni dan Budaya</option>
+						<option value="Toponimi Pemerintahan">Toponimi Pemerintahan</option>
+						<option value="Toponimi Pemerintahan Negara Asing">Toponimi Pemerintahan Negara Asing</option>
+						<option value="Toponimi Pendidikan dan IPTEK">Toponimi Pendidikan dan IPTEK</option>
+						<option value="Toponimi Perairan">Toponimi Perairan</option>
+						<option value="Toponimi Perekonomian dan Perdagangan">Toponimi Perekonomian dan Perdagangan</option>
+						<option value="Toponimi Peribadatan">Toponimi Peribadatan</option>
+						<option value="Toponimi Permakaman">Toponimi Permakaman</option>
+						<option value="Toponimi Permukiman">Toponimi Permukiman</option>
+						<option value="Toponimi Pertahanan dan Keamanan">Toponimi Pertahanan dan Keamanan</option>
+						<option value="Toponimi Pertambangan Mineral">Toponimi Pertambangan Mineral</option>
+						<option value="Toponimi Relief">Toponimi Relief</option>
+						<option value="Toponimi Sarana Kesehatan">Toponimi Sarana Kesehatan</option>
+						<option value="Toponimi Sosial">Toponimi Sosial</option>
+						<option value="Toponimi Transportasi">Toponimi Transportasi</option>
+						<option value="Toponimi Utilitas">Toponimi Utilitas</option>
+						<option value="Toponimi Vegetasi dan Lahan Terbuka">Toponimi Vegetasi dan Lahan Terbuka</option>
+						<option value="Toponimi Wilayah Administrasi">Toponimi Wilayah Administrasi</option>
+					
+                </select>
+			</div>
+			
+			<div class="form-group">
+                <label>Kategori Unsur <span class="text-danger">*</span></label>
+				<select class="form-control" name="kategori" id="kategori">
+				<?php
+					$db = mysqli_connect("localhost","root","","gisdata")
+					or die(mysqli_error());
+					
+					if (isset($_POST['kelas']))
+					{
+				
+					$unsur = $_POST['kelas'];
+					$tbl	= "SELECT * FROM tb_kategori where unsur LIKE '%$unsur%'";
+					$query	= mysqli_query($db,$tbl);
+					?>
+					
+					<?php
+						while($data	= mysqli_fetch_array($query)){ 
+					?>
+						
+						<option value="<?php echo $data['kategori']; ?>">
+							<?php echo $data['kategori']; ?>
+						</option>
+					<?php
+						}
+					}
+					?>
+                </select>
+            </div>
+			
+			
+			
+			
+			<div class="form-group">
+                <label>Kecamatan <span class="text-danger">*</span></label>
+                <select class="form-control" name="kecamatan" id="kecamatan" >
+						<option value="Banua Lawas">Banua Lawas</option>
+						<option value="Bintang Ara">Bintang Ara</option>
+						<option value="Haruai">Haruai</option>
+						<option value="Jaro">Jaro</option>
+						<option value="Kelua">Kelua</option>
+						<option value="Muara Harus">Muara Harus</option>
+						<option value="Muara Uya">Muara Uya</option>
+						<option value="Murung Pudak">Murung Pudak</option>
+						<option value="Pugaan">Pugaan</option>
+						<option value="Tanjung">Tanjung</option>
+						<option value="Tanta">Tanta</option>
+						<option value="Upau">Upau</option>
+										
+                </select>
+			</div>
+			<div class="form-group">
+                <label>Desa/Kelurahan <span class="text-danger">*</span></label>
+                <select class="form-control" name="desa" id="desa" >
+				<?php
+				$db = mysqli_connect("localhost","root","","gisdata")
+				or die(mysqli_error());
+                $query = mysql_query("SELECT * FROM tb_kategori where unsur LIKE '%$unsur%'");
+                while ($row = mysql_fetch_array($query)) {
+                ?>
+                    <option id="desa" class="<?php echo $row['desa']; ?>" value="<?php echo $row['desa']; ?>">
+                        <?php echo $row['desa']; ?>
+                    </option>
+                <?php
+                }
+                ?>		
+                </select>
+			</div>

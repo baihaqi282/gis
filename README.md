@@ -1,2 +1,0 @@
-# gis
-petaku
